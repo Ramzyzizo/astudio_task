@@ -16,5 +16,7 @@ Route::middleware('auth:api')->group(function () {
     
 
     Route::resource('projects', ProjectController::class);
+    Route::get('my-projects', [ProjectController::class, 'my_projects']);
+    Route::post('project/{project}/assign-me', [ProjectController::class, 'assign_me']);
     Route::resource('timesheets', TimesheetController::class);
 });

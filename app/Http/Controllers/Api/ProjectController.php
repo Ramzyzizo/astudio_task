@@ -18,6 +18,13 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
+        $projects = Project::all();
+        $projects = ProjectsResource::collection($projects);
+        return response()->json($projects);
+  
+    }
+    public function my_projects(Request $request)
+    {
         $user = $request->user();
         $projects = ProjectsResource::collection($user->projects);
         return response()->json($projects);
@@ -65,5 +72,14 @@ class ProjectController extends Controller
         $project->delete();
         return response()->json([
             'message' => 'Project has been deleted successfully!']);
+    }
+
+
+    public function assign_me(Project $project, Request $request)
+    {
+        $user = $request->user();
+        $project->users()->syncWithoutDetaching($user->id);
+        return response()->json([
+            'message' => 'You have been assigned to the project!']);
     }
 }
