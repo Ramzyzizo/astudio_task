@@ -20,7 +20,7 @@ class Project extends Model
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class, 'attribute_values', 'entity_id', 'attribute_id')
-            ->withPivot('value')
+            ->withPivot('value','start_date','end_date')
             ->withTimestamps();
     }
 }

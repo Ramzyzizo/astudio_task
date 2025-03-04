@@ -25,15 +25,11 @@ class ProjectRequest extends FormRequest
         return [
             'name' => 'required|string',
             'status' => 'required|in:0,1',
-            'attributes.*' => 'required|string',
-            'attributes' => ['required', 'array', function ($attribute, $value, $fail) {
-                $existingAttributes = Attribute::whereIn('id', array_keys($value))->pluck('id')->toArray();
-                foreach (array_keys($value) as $attributeId) {
-                    if (!in_array($attributeId, $existingAttributes)) {
-                        $fail("The attribute ID {$attributeId} does not exist for {$attribute}.");
-                    }
-                }
-            }]
+            'attributes' => ['required', 'array'],
+            'attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
+            'attributes.*.value' => ['required', 'string'],
+            'attributes.*.start_date' => ['nullable', 'date_format:d-m-Y'],
+            'attributes.*.end_date' => ['nullable', 'date_format:d-m-Y', 'after_or_equal:attributes.*.start_date'],
         ];
     }
 }

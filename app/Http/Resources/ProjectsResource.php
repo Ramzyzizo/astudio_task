@@ -18,6 +18,21 @@ class ProjectsResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'status' => $this->status,
+            'attributes' => $this->attributes
+                ->groupBy('id') 
+                ->map(function ($groupedAttributes) {
+                    return [
+                        'name' => $groupedAttributes->first()->name,
+                        'type' => $groupedAttributes->first()->type,
+                        'values' => $groupedAttributes->map(function ($attribute) {
+                            return [
+                                'value' => $attribute->pivot->value,
+                                'start_date' => $attribute->pivot->start_date,
+                                'end_date' => $attribute->pivot->end_date,
+                            ];
+                        })->values(),
+                    ];
+                })->values(), // Reset array keys
         ];
     }
 }
