@@ -18,9 +18,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::all();
-        $projects = ProjectsResource::collection($projects);
+        $projects = Project::with('attributes')->get();
         return response()->json($projects);
+        // $projects = ProjectsResource::collection($projects);
   
     }
     public function my_projects(Request $request)
@@ -37,6 +37,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         $user = $request->user();
+        return $request->validated();
         $user->projects()->create($request->validated());        
         return response()->json([
             'message' => 'Project has been created successfully!']);

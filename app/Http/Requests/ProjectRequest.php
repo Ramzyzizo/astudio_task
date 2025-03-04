@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Attribute;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProjectRequest extends FormRequest
@@ -24,6 +25,15 @@ class ProjectRequest extends FormRequest
         return [
             'name' => 'required|string',
             'status' => 'required|in:0,1',
+            'attributes.*' => 'required|string',
+            'attributes' => ['required', 'array', function ($attribute, $value, $fail) {
+                $existingAttributes = Attribute::whereIn('id', array_keys($value))->pluck('id')->toArray();
+                foreach (array_keys($value) as $attributeId) {
+                    if (!in_array($attributeId, $existingAttributes)) {
+                        $fail("The attribute ID {$attributeId} does not exist for {$attribute}.");
+                    }
+                }
+            }]
         ];
     }
 }

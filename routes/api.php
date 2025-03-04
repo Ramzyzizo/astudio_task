@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TimesheetController;
@@ -19,4 +20,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('my-projects', [ProjectController::class, 'my_projects']);
     Route::post('project/{project}/assign-me', [ProjectController::class, 'assign_me']);
     Route::resource('timesheets', TimesheetController::class);
+    Route::resource('attributes', AttributeController::class);
 });
