@@ -12,4 +12,5 @@ class AttributeValue extends Model
     {
         return $this->belongsTo(Attribute::class);
     }
+    
 }

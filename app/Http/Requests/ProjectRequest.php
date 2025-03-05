@@ -29,7 +29,7 @@ class ProjectRequest extends FormRequest
             'attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
             'attributes.*.value' => ['required', 'string'],
             'attributes.*.start_date' => ['nullable', 'date_format:d-m-Y'],
-            'attributes.*.end_date' => ['nullable', 'date_format:d-m-Y', 'after_or_equal:attributes.*.start_date'],
+            'attributes.*.end_date' => ['nullable', 'after_or_equal:attributes.*.start_date'],
         ];
     }
 }
