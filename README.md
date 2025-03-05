@@ -1,12 +1,13 @@
-# astudio_task
+### 📌 **Instructions for Astudio Task Project:**
 
+```md
 ## Project Setup
 
 Follow these steps to set up the project on your local machine.
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone repo
+git clone <repo-url>
 cd astudio_task
 ```
 
@@ -45,6 +46,22 @@ php artisan cache:clear
 php artisan serve
 ```
 
+---
 
-### ✅ Your project is now ready! 🚀
+## 🧪 Running Feature Tests
 
+### ✅ Available Feature Tests:
+- **AuthTest** - Tests authentication functionality (login, registration, logout).
+- **AttributeTest** - Tests attribute creation, updates, and delete.
+- **ProjectTest** - Covers CRUD operations on projects.
+- **TimeSheetTest** - Tests timesheet creation, updates, and delete.
+
+### 🔹 **Run All Tests**
+```sh
+php artisan test
+```
+
+### 🔹 **Run a Specific Test File**
+```sh
+php artisan test --filter ProjectTest
+```
