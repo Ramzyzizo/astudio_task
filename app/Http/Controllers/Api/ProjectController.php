@@ -35,7 +35,7 @@ class ProjectController extends Controller
         $project_ids_for_dates = [];
         $project_ids_for_attributes = [];
 
-        foreach ($filters as $attribute => $value) {
+        foreach ($filters??[] as $attribute => $value) {
             if (preg_match('/^(>=|<=|>|<)\s*(\d{4}-\d{2}-\d{2})$/', $value, $matches)) {
                 $operator = $matches[1];
                 $dateValue = $matches[2];
@@ -66,7 +66,10 @@ class ProjectController extends Controller
             }
         }
         $all_project_ids = array_merge($project_ids_for_dates ?? [], $project_ids_for_attributes ?? []);
-        $projects = $query->whereIn('id', $all_project_ids)->get();
+        if(!empty($filters)){
+            $query = $query->whereIn('id', $all_project_ids);
+        }
+        $projects = $query->get();
         $projects = ProjectsResource::collection($projects);
 
         return response()->json($projects);

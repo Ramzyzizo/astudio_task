@@ -17,8 +17,8 @@ class TimeSheetResource extends JsonResource
         return [
             'id' => $this->id,
             'task_name' => $this->task_name,
-            'project_id' => $this->project_id,
             'project' => $this->project->name,
+            'project_id' => $this->project_id,
             'created_at' => $this->created_at->format('d-m-Y'),
         ];
     }

@@ -28,8 +28,8 @@ class ProjectRequest extends FormRequest
             'attributes' => ['required', 'array'],
             'attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
             'attributes.*.value' => ['required', 'string'],
-            'attributes.*.start_date' => ['nullable', 'date_format:d-m-Y'],
-            'attributes.*.end_date' => ['nullable', 'after_or_equal:attributes.*.start_date'],
+            'attributes.*.start_date' => ['nullable', 'date_format:Y-m-d'],
+            'attributes.*.end_date' => ['nullable', 'date_format:Y-m-d','after_or_equal:attributes.*.start_date'],
         ];
     }
 }
