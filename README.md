@@ -5,9 +5,13 @@
 
 Follow these steps to set up the project on your local machine.
 
+
+Repo : https://github.com/Ramzyzizo/astudio_task
+Postman Doc. : https://documenter.getpostman.com/view/37542223/2sAYdmjSjX
+
 ### 1️⃣ Clone the Repository
 ```sh
-git clone <repo-url>
+git clone https://github.com/Ramzyzizo/astudio_task
 cd astudio_task
 ```
 
